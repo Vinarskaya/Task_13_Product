@@ -31,6 +31,33 @@ public class ProductManagerTest {
     }
 
     @Test
+    public void shouldSearchByTextBookIfFewProducts() {
+
+        Product[] expected = {item2, item3, item4};
+        Product[] actual = manager.searchBy("Book");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchByTextBookIfOneProduct() {
+
+        Product[] expected = {item4};
+        Product[] actual = manager.searchBy("Book3");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchByTextBookIfZeroProduct() {
+
+        Product[] expected = {};
+        Product[] actual = manager.searchBy("Телефон5");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void shouldShowProduct() {
         Product[] expected = {item1, item2, item3, item4, item5, item6};
         Product[] actual = manager.findAll();
@@ -48,14 +75,6 @@ public class ProductManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    @Test
-    public void shouldSearchByTextBook() {
-
-        Product[] expected = {item2, item3, item4};
-        Product[] actual = manager.searchBy("Book");
-
-        Assertions.assertArrayEquals(expected, actual);
-    }
 
     @Test
     public void shouldRemoveById5() {
