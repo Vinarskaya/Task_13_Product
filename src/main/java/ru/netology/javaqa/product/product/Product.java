@@ -1,5 +1,6 @@
 package ru.netology.javaqa.product.product;
-public class Product {
+
+public abstract class Product {
     protected int id;
     protected String name;
     protected int price;
@@ -20,5 +21,13 @@ public class Product {
 
     public int getPrice() {
         return price;
+    }
+
+    public boolean matches(String search) {
+        if (getName().matches(search)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

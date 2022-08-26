@@ -12,13 +12,13 @@ public class ProductManagerTest {
     ProductRepository repo = new ProductRepository();
     ProductManager manager = new ProductManager(repo);
 
-    Product item1 = new Smartphone(1, "Телефон1", 55_000, "Company1");
-    Product item2 = new Book(2, "Book1", 1_000, "Author1");
-    Product item3 = new Book(3, "Book2", 1_500, "Author2");
-    Product item4 = new Book(4, "Book3", 1_600, "Author1");
-    Product item5 = new Smartphone(5, "Телефон2", 50_000, "Company2");
-    Product item6 = new Smartphone(6, "Телефон3", 56_000, "Company2");
-    Product item7 = new Smartphone(7, "Телефон4", 20_000, "Company3");
+    Smartphone item1 = new Smartphone(1, "Phone1", 55_000, "Company1");
+    Book item2 = new Book(2, "Book1", 1_000, "Author1");
+    Book item3 = new Book(3, "Book2", 1_500, "Author2");
+    Book item4 = new Book(4, "Book3", 1_600, "Author1");
+    Smartphone item5 = new Smartphone(5, "Phone2", 50_000, "Company2");
+    Smartphone item6 = new Smartphone(6, "Phone3", 56_000, "Company2");
+    Smartphone item7 = new Smartphone(7, "Phone4", 20_000, "Company3");
 
     @BeforeEach
     public void setup() {
@@ -91,6 +91,60 @@ public class ProductManagerTest {
 
         int expected = 56_000;
         int actual = manager.getPrice(item6);
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldShowMatchesByBookNameIfTrue() {
+
+        boolean expected = true;
+        boolean actual = item2.matches("Book1");
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldShowMatchesByPhoneNameIfTrue() {
+
+        boolean expected = true;
+        boolean actual = item1.matches("Phone1");
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldShowMatchesByNameIfFalse() {
+
+        boolean expected = false;
+        boolean actual = item2.matches("Phone1");
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldShowMatchesByAuthorIsTrue() {
+
+        boolean expected = true;
+        boolean actual = item3.matches("Author2");
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldShowMatchesByManufacturerIfTrue() {
+
+        boolean expected = true;
+        boolean actual = item1.matches("Company1");
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldShowMatchesByManufacturerIfFalse() {
+
+        boolean expected = false;
+        boolean actual = item1.matches("Company2");
 
         Assertions.assertEquals(expected, actual);
     }
